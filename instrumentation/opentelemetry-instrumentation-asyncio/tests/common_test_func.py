@@ -14,9 +14,13 @@
 
 import asyncio
 
+pq = asyncio.PriorityQueue()
+pq.put_nowait(('item1', 'item2'))
+pq.put_nowait(('item3', 'item4'))
+
 
 async def async_func():
-    await asyncio.sleep(0.1)
+    return await pq.get()
 
 
 async def factorial(number: int):

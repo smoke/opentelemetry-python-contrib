@@ -61,8 +61,10 @@ class TestAsyncioWait(TestBase):
 
     def test_asyncio_wait_for(self):
         async def main():
-            await asyncio.wait_for(async_func(), 1)
-            await asyncio.wait_for(async_func(), 1)
+            r = await asyncio.wait_for(async_func(), 1)
+            self.assertEqual(r, ('item1', 'item2'))
+            r2 = await asyncio.wait_for(async_func(), 1)
+            self.assertEqual(r2, ('item3', 'item4'))
 
         asyncio.run(main())
         spans = self.memory_exporter.get_finished_spans()
